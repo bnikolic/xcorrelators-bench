@@ -26,6 +26,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #include <iostream>
 #include <emmintrin.h>
 
+#include <boost/timer/timer.hpp>
+
+
 using namespace std;
 
 const unsigned nrStations	 = 200;
@@ -33,7 +36,7 @@ const unsigned nrTimes	 = 768, nrTimesWidth = 768; // 770
 const unsigned nrChannels	 = 2;
 const unsigned nrPolarizations = 2;
 const unsigned iter = 10;
-const unsigned nrThreads = 32;
+const unsigned nrThreads = 2;
 
 class params {
 public:
@@ -206,9 +209,8 @@ int main()
 #endif
 
     params p[nrThreads];
-    timer totalTimer("total");
 
-    totalTimer.start();
+    boost::timer::cpu_timer totalTimer;
     for(unsigned t=0; t<nrThreads; t++) {
 	p[t].ops = 0;
 	p[t].bytesLoaded = 0;
@@ -235,7 +237,9 @@ int main()
     }
     totalTimer.stop();
 
-    double elapsed = totalTimer.getTimeInSeconds();
+    // This the CPU-seconds of time, which should I think be the right
+    // number to use
+    double elapsed = totalTimer.elapsed().user/1e9;
     double flops = (ops / elapsed) / 1000000000.0;
     double efficiency = (flops / maxFlops) * 100.0;
     cout << "correlate took " << elapsed << " s, max Gflops = " << maxFlops << ", achieved " << flops << " Gflops, " << efficiency << " % efficiency" << endl;
