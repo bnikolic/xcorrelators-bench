@@ -28,9 +28,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using namespace std;
 
-const unsigned nrStations	 = 64;
+const unsigned nrStations	 = 200;
 const unsigned nrTimes	 = 768, nrTimesWidth = 768; // 770
-const unsigned nrChannels	 = 128;
+const unsigned nrChannels	 = 2;
 const unsigned nrPolarizations = 2;
 const unsigned iter = 10;
 const unsigned nrThreads = 32;
