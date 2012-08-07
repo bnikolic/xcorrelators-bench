@@ -26,10 +26,18 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using namespace std;
 
-static unsigned char cellToStatX[MAX_CELLS], cellToStatY[MAX_CELLS];
+static unsigned char *cellToStatX=NULL;
+static unsigned char *cellToStatY=NULL;
 
 static unsigned fillCellToStatTable()
 {
+     // In fact smaller arrays should be sufficient as only one
+     // triangle of the baselines needs to be filled out
+     size_t celldim = (nrStations/2+1)*(nrStations/3+1);
+     free(cellToStatX); cellToStatX=(unsigned char*) malloc(celldim*sizeof(*cellToStatX));
+     free(cellToStatY); cellToStatY=(unsigned char*) malloc(celldim*sizeof(*cellToStatY));
+    
+    
     unsigned nrCells, stat0, stat2;
 
     for (stat2 = nrStations % 2 ? 1 : 2, nrCells = 0; stat2 < nrStations; stat2 += 2) {
