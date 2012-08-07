@@ -9,11 +9,16 @@ LDFLAGS         ?= -m64 -lpthread -L${BOOSTROOT}/lib -lboost_timer -lboost_syste
 
 
 
-CC_SOURCES	= main.cc timer.cc cpu_correlator_1x1.cc cpu_correlator_1x1_sse3.cc cpu_correlator_1x1_sse3.cc cpu_correlator_1x1_time_sse3.cc reference_correlator.cc cpu_correlator_2x2_sse3.cc cpu_correlator_2x2_time_sse3.cc cpu_correlator_3x2_time_sse3.cc
+CC_SOURCES	= main.cc timer.cc cpu_correlator_1x1.cc cpu_correlator_1x1_sse3.cc cpu_correlator_1x1_sse3.cc cpu_correlator_1x1_time_sse3.cc reference_correlator.cc cpu_correlator_2x2_sse3.cc cpu_correlator_2x2_time_sse3.cc cpu_correlator_3x2_time_sse3.cc fpuspinner.cc
 
 CC_OBJECTS	= $(CC_SOURCES:%.cc=%.o)
 
 CC_AS		= $(CC_SOURCES:%.cc=%.s)
+
+default: correlator
+
+fpuspinner.o:   fpuspinner.cc
+	        $(CXX) $(CPPFLAGS) -msse3 -Wall  -m64 -mfpmath=sse -g -c $< -o $@
 
 %.o:		%.cc
 		$(CXX) $(CFLAGS) ${CPPFLAGS} -c $< -o $@

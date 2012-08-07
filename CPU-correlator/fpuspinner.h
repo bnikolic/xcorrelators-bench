@@ -1,0 +1,2 @@
+
+void* calcMaxFlops(void* data);
