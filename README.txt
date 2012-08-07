@@ -35,3 +35,13 @@ Rob van Nieuwpoort
 nieuwpoort@astron.nl or rob@cs.vu.nl or rob@vannieuwpoort.com
 http://www.astron.nl/~nieuwpoort or http://www.cs.vu.nl/~rob or
 http://www.vannieuwpoort.com
+
+
+Addendum by B. Nikolic (7 August 2012)
+--------------------------------------
+
+This is a modified version of the original packages. For original
+packages you can always refer to http://www.exaska.org/?q=Codes. This
+source code distribution does not include the PDF of the paper but the
+paper is widely available on the Internet.
+
